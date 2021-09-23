@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:treeved_flutter_task/data/data.dart';
 import 'package:treeved_flutter_task/data/view/filters_view.dart';
 import 'package:treeved_flutter_task/main.dart';
+import 'package:treeved_flutter_task/widgets/car_card_widgets.dart';
 
 class SeachView extends StatefulWidget {
   const SeachView({Key? key}) : super(key: key);
