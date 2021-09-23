@@ -1,21 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:get/get.dart';
+import 'package:treeved_flutter_task/controller/treeved_contoller.dart';
+import 'package:treeved_flutter_task/widgets/perfererd_model.widget.dart';
+import 'package:treeved_flutter_task/widgets/slider_widget.dart';
+import 'package:treeved_flutter_task/widgets/toogle_items.dart';
+import 'package:treeved_flutter_task/widgets/vehicle_type_widget.dart';
 
-class FiltersView extends StatefulWidget {
+class FiltersView extends GetView<TreeVedController> {
+  // bool issetect = true;
+
   const FiltersView({Key? key}) : super(key: key);
-
-  @override
-  State<FiltersView> createState() => _FiltersViewState();
-}
-
-class _FiltersViewState extends State<FiltersView> {
-  int isSetected = 1;
-  int isSetected1 = 1;
-  List<String> type1 = ['Suv', "Hatchback", "Plug-In-Hybird"];
-  List<String> type2 = ["Hybird", "Pickup", "Van"];
-  SfRangeValues _values = const SfRangeValues(40.0, 80.0);
-  bool issetect = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +19,14 @@ class _FiltersViewState extends State<FiltersView> {
         backgroundColor: const Color(
           0xffF8F9FD,
         ),
-        leading: const Icon(
-          Icons.cancel_outlined,
-          color: Colors.black,
+        leading: InkWell(
+          onTap: () {
+            Get.back();
+          },
+          child: const Icon(
+            Icons.cancel_outlined,
+            color: Colors.black,
+          ),
         ),
         centerTitle: true,
         title: const Text(
@@ -41,6 +41,7 @@ class _FiltersViewState extends State<FiltersView> {
             onPressed: () {},
             child: const Text(
               'Reset',
+              style: TextStyle(color: Color(0xff5A6EFD)),
             ),
           )
         ],
@@ -57,8 +58,8 @@ class _FiltersViewState extends State<FiltersView> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
+                  children: const [
+                    Padding(
                       padding: EdgeInsets.all(
                         10,
                       ),
@@ -73,54 +74,11 @@ class _FiltersViewState extends State<FiltersView> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
-                        itemCount: 6,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Container(
-                              padding: const EdgeInsets.all(10.0),
-                              height: 70,
-                              width: 70,
-                              child: Center(
-                                child: Image.asset(
-                                    'assets/icons/580b585b2edbce24c47b2cc9.png'),
-                              ),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.shade500,
-                                    offset: const Offset(4.0, 4.0),
-                                    blurRadius: 15,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  const BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(-4.0, -4.0),
-                                    blurRadius: 15,
-                                    spreadRadius: 1.0,
-                                  ),
-                                ],
-                                color: Colors.grey[300],
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                    PerfererdModelwidget(),
                   ],
                 ),
               ),
-
-              //todo:
-              Expanded(
-                  child: Container(
+              Container(
                 color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -131,7 +89,7 @@ class _FiltersViewState extends State<FiltersView> {
                         height: 15,
                       ),
                       const Text(
-                        'Vehicy Type',
+                        'Vehicle Type',
                         style: TextStyle(
                           color: Color(
                             0xff393363,
@@ -143,67 +101,14 @@ class _FiltersViewState extends State<FiltersView> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(
-                            type1.length,
-                            (index) => OutlinedButton(
-                              onPressed: () {
-                                setState(() {
-                                  isSetected = index;
-                                });
-                              },
-                              child: Text(
-                                type1[index],
-                                style: TextStyle(
-                                  color: isSetected == index
-                                      ? Colors.blue
-                                      : Colors.grey,
-                                ),
-                              ),
-                              style: OutlinedButton.styleFrom(
-                                  side: BorderSide(
-                                color: isSetected == index
-                                    ? Colors.blue
-                                    : Colors.grey,
-                              )),
-                            ),
-                          )),
+                      const VehicleTypeWidgets(),
                       const SizedBox(
                         height: 10,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: List.generate(
-                          type2.length,
-                          (index) => OutlinedButton(
-                            onPressed: () {
-                              setState(() {
-                                isSetected1 = index;
-                              });
-                            },
-                            child: Text(
-                              type2[index],
-                              style: TextStyle(
-                                  color: isSetected1 == index
-                                      ? Colors.blue
-                                      : Colors.grey),
-                            ),
-                            style: OutlinedButton.styleFrom(
-                                side: BorderSide(
-                              color: isSetected1 == index
-                                  ? Colors.blue
-                                  : Colors.grey,
-                            )),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: const [
-                          Text(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
                             'Price Range',
                             style: TextStyle(
                               color: Color(
@@ -213,27 +118,39 @@ class _FiltersViewState extends State<FiltersView> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                          Row(
+                            children: [
+                              Obx(() => Text(
+                                    ' \$${controller.start.value!.toInt() * 23}',
+                                    style: const TextStyle(
+                                      color: Color(
+                                        0xff393363,
+                                      ),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+                              const SizedBox(
+                                width: 5.0,
+                              ),
+                              Obx(() => Text(
+                                    '-  \$${controller.end.value!.toInt() * 23}',
+                                    style: const TextStyle(
+                                      color: Color(
+                                        0xff393363,
+                                      ),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+                            ],
+                          )
                         ],
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        height: 100,
-                        alignment: Alignment.bottomCenter,
-                        child: SfRangeSlider(
-                          interval: 10,
-                          showLabels: true,
-                          values: _values,
-                          onChanged: (value) {
-                            setState(() {
-                              _values = value;
-                            });
-                          },
-                          max: 100,
-                          min: 0.0,
-                        ),
-                      ),
+                      const SliderWidget(),
                       const SizedBox(
                         height: 20,
                       ),
@@ -250,7 +167,7 @@ class _FiltersViewState extends State<FiltersView> {
                       const SizedBox(
                         height: 20,
                       ),
-                      ToogleView(),
+                      const ToogleItems(),
                       const SizedBox(
                         height: 30,
                       ),
@@ -282,6 +199,7 @@ class _FiltersViewState extends State<FiltersView> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                          primary: const Color(0xff5A6EFD),
                           fixedSize:
                               Size(MediaQuery.of(context).size.width, 50),
                         ),
@@ -293,70 +211,8 @@ class _FiltersViewState extends State<FiltersView> {
                     ],
                   ),
                 ),
-              ))
+              )
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ToogleView extends StatefulWidget {
-  ToogleView({Key? key}) : super(key: key);
-
-  @override
-  _ToogleViewState createState() => _ToogleViewState();
-}
-
-class _ToogleViewState extends State<ToogleView> {
-  List<String> list = [
-    "All",
-    "1",
-    "2",
-    "3",
-    "4+",
-  ];
-
-  int isSetected = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      // crossAxisAlignment: CrossAxisAlignment.,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(
-        list.length,
-        (index) => Expanded(
-          child: InkWell(
-            onTap: () {
-              setState(() {
-                isSetected = index;
-              });
-            },
-            child: Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.all(10.0),
-              // width: 82,
-              decoration: BoxDecoration(
-                borderRadius: isSetected == index
-                    ? BorderRadius.circular(
-                        5.0,
-                      )
-                    : null,
-                color: isSetected == index ? Colors.blue : Colors.grey.shade300,
-
-                // color: Colors.blue,
-              ),
-              child: Text(
-                list[index],
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: isSetected == index ? Colors.white : Colors.black,
-                ),
-              ),
-            ),
           ),
         ),
       ),

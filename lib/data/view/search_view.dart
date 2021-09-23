@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
+import 'package:treeved_flutter_task/controller/treeved_contoller.dart';
 import 'package:treeved_flutter_task/data/data.dart';
 import 'package:treeved_flutter_task/data/view/filters_view.dart';
-import 'package:treeved_flutter_task/main.dart';
 import 'package:treeved_flutter_task/widgets/car_card_widgets.dart';
 
-class SeachView extends StatefulWidget {
-  const SeachView({Key? key}) : super(key: key);
+class SearchView extends StatefulWidget {
+  const SearchView({Key? key}) : super(key: key);
 
   @override
-  State<SeachView> createState() => _SeachViewState();
+  State<SearchView> createState() => _SearchViewState();
 }
 
-class _SeachViewState extends State<SeachView> {
-  late TextEditingController controller;
+class _SearchViewState extends State<SearchView> {
+  late TextEditingController textcontroller;
   @override
   void initState() {
-    controller = TextEditingController(text: 'Tesla Model 3');
+    textcontroller = TextEditingController(text: 'Tesla Model 3');
     super.initState();
   }
+
+  final controller = Get.find<TreeVedController>();
+
+  final _rent = ["Rent", "Sale"];
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +37,7 @@ class _SeachViewState extends State<SeachView> {
                 Color(0xffF8F9FD),
                 Color(0xffF8F9FD),
                 Color(0xffF8F9FD),
+                Colors.white
               ],
             ),
           ),
@@ -62,7 +67,7 @@ class _SeachViewState extends State<SeachView> {
                         ),
                         Expanded(
                           child: TextField(
-                            controller: controller,
+                            controller: textcontroller,
                             decoration: const InputDecoration.collapsed(
                                 hintText: 'Search'),
                           ),
@@ -137,6 +142,55 @@ class _SeachViewState extends State<SeachView> {
                   ),
                 ),
               ),
+              SliverToBoxAdapter(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin:const EdgeInsets.symmetric(horizontal: 10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: List.generate(
+                      _rent.length,
+                      (index) => Obx(
+                        () => InkWell(
+                          onTap: () {
+                            controller.isSetcectedrent.value = index;
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: controller.isSetcectedrent.value == index
+                                ? MediaQuery.of(context).size.width * 0.50
+                                : MediaQuery.of(context).size.width * 0.43,
+                            padding: const EdgeInsets.all(15.0),
+                            decoration: controller.isSetcectedrent.value ==
+                                    index
+                                ? BoxDecoration(
+                                    color: controller.isSetcectedrent.value ==
+                                            index
+                                        ? const Color(0xff5A6EFD)
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  )
+                                : null,
+                            child: Text(
+                              "For ${_rent[index]}",
+                              style: TextStyle(
+                                color: controller.isSetcectedrent.value == index
+                                    ? Colors.white
+                                    : Colors.grey.shade600,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               const SliverToBoxAdapter(
                 child: SizedBox(
                   height: 10,
@@ -153,23 +207,6 @@ class _SeachViewState extends State<SeachView> {
                 ),
               )
             ],
-
-            // child: Column(
-            //   children: [
-
-            //     Expanded(
-            //       child: Container(
-            //         decoration: const BoxDecoration(
-            //             gradient: LinearGradient(colors: [
-            //           Color(0xffDADCE0),
-            //           Color(0xffF8F9FD),
-            //           Color(0xffF8F9FD),
-            //           Color(0xffF8F9FD),
-            //         ])),
-            //       ),
-            //     )
-            //   ],
-            // ),
           ),
         ),
       ),

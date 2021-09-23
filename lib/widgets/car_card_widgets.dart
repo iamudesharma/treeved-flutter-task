@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:treeved_flutter_task/data/data.dart';
 
@@ -24,15 +23,17 @@ class CarCardWidget extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: SizedBox(
-                          height: 200,
-                          width: MediaQuery.of(context).size.width,
-                          child: Image.asset(
-                            car.carImage,
-                            fit: BoxFit.cover,
-                          )),
+                    Positioned.fill(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: SizedBox(
+                            height: 200,
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.asset(
+                              car.carImage,
+                              fit: BoxFit.cover,
+                            )),
+                      ),
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
@@ -45,8 +46,8 @@ class CarCardWidget extends StatelessWidget {
                           ),
                           gradient: LinearGradient(
                             colors: [
-                              const Color(0xffACA7E6).withOpacity(0.4),
-                              const Color(0xff5F70F7).withOpacity(0.6),
+                              const Color(0xffACA7E6).withOpacity(0.5),
+                              const Color(0xff5F70F7).withOpacity(0.7),
                             ],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
@@ -66,7 +67,7 @@ class CarCardWidget extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15.0),
                                   ),
                                   // onSurface: Color(0xff42499D),
-                                  primary:const Color(0xff5D64B0),
+                                  primary: const Color(0xff5D64B0),
                                   // onPrimary: Color(0xff42499D),
                                 ),
                                 child: const Text(
@@ -80,17 +81,17 @@ class CarCardWidget extends StatelessWidget {
                                 onPressed: () {},
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   // onSurface: Color(0xff42499D),
-                                  primary: Color(0xff5A6EFD),
+                                  primary: const Color(0xff5A6EFD),
                                   // onPrimary: Color(0xff42499D),
                                 ),
                                 child: const Text(
                                   "\$340,000",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 19,
+                                    fontSize: 17,
                                   ),
                                 ),
                               ),
@@ -109,29 +110,29 @@ class CarCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                    children: const [
+                    children: [
                       Chip(
-                        backgroundColor: Color(
+                        backgroundColor: const Color(
                           0xffE8EAEE,
                         ),
                         label: Text(
                           'On Sale',
                           style: TextStyle(
-                            color: Color(0xff4D4F67),
+                            color: const Color(0xff5F70F7).withOpacity(0.7),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Chip(
-                        backgroundColor: Color(
+                        backgroundColor: const Color(
                           0xffE8EAEE,
                         ),
                         label: Text(
                           'Installment',
                           style: TextStyle(
-                            color: Color(0xff4D4F67),
+                            color: const Color(0xff5F70F7).withOpacity(0.7),
                           ),
                         ),
                       ),
@@ -175,6 +176,7 @@ class CarCardWidget extends StatelessWidget {
                   onPressed: () {},
                   child: const Text(
                     'View Details',
+                    style: TextStyle(color: Color(0xff5A6EFD)),
                   ))
             ],
           ),
@@ -183,3 +185,7 @@ class CarCardWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+// import 'package:syncfusion_flutter_charts/charts.dart' hide LabelPlacement;
