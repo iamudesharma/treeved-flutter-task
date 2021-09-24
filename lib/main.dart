@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:treeved_flutter_task/controller/treeved_contoller.dart';
 
-// import 'data/view/Explore_view.dart';
+
 import 'data/view/explore.dart';
 
 void main() {

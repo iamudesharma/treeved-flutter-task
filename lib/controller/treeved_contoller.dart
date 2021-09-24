@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TreeVedController extends GetxController {
+
+  late TextEditingController textcontroller;
   List<String> rent = [
     "Buy",
     "Rent",
@@ -40,5 +42,6 @@ class TreeVedController extends GetxController {
   void init() {
     start.value = values.value.start;
     end.value = values.value.start;
+     textcontroller = TextEditingController(text: 'Tesla Model 3',);
   }
 }

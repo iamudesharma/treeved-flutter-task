@@ -63,7 +63,7 @@ class Header extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => const SearchView());
+                      Get.to(() => SearchView());
                     },
                     child: Container(
                       decoration: BoxDecoration(

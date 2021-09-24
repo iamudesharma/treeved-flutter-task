@@ -6,24 +6,12 @@ import 'package:treeved_flutter_task/data/data.dart';
 import 'package:treeved_flutter_task/data/view/filters_view.dart';
 import 'package:treeved_flutter_task/widgets/car_card_widgets.dart';
 
-class SearchView extends StatefulWidget {
-  const SearchView({Key? key}) : super(key: key);
-
-  @override
-  State<SearchView> createState() => _SearchViewState();
-}
-
-class _SearchViewState extends State<SearchView> {
-  late TextEditingController textcontroller;
-  @override
-  void initState() {
-    textcontroller = TextEditingController(text: 'Tesla Model 3');
-    super.initState();
-  }
-
+class SearchView extends StatelessWidget {
   final controller = Get.find<TreeVedController>();
 
   final _rent = ["Rent", "Sale"];
+
+  SearchView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,24 +46,35 @@ class _SearchViewState extends State<SearchView> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
+                        InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
+                          ),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         Expanded(
                           child: TextField(
-                            controller: textcontroller,
-                            decoration: const InputDecoration.collapsed(
-                                hintText: 'Search'),
-                          ),
+                              controller: controller.textcontroller,
+                              decoration: const InputDecoration.collapsed(
+                                  hintText: 'Search',
+                                  hintStyle: TextStyle(
+                                    color: Color(0xff1E184E),
+                                    fontWeight: FontWeight.bold,
+                                  ))),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         GestureDetector(
+                          onTap: () {
+                            controller.textcontroller.clear();
+                          },
                           child: const Icon(Icons.cancel,
                               color: Color(0xff596CFC)),
                         )
@@ -145,7 +144,7 @@ class _SearchViewState extends State<SearchView> {
               SliverToBoxAdapter(
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  margin:const EdgeInsets.symmetric(horizontal: 10.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15.0),

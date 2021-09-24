@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:treeved_flutter_task/controller/treeved_contoller.dart';
 import 'package:treeved_flutter_task/data/data.dart';
+import 'package:treeved_flutter_task/data/view/search_view.dart';
 import 'package:treeved_flutter_task/widgets/car_card_widgets.dart';
 import 'package:treeved_flutter_task/widgets/header.dart';
 
@@ -107,8 +108,13 @@ class ExploreView extends GetView<TreeVedController> {
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            (context, index) => CarCardWidget(
-              car: carsList[index],
+            (context, index) => InkWell(
+              onTap: () {
+                Get.to(()=>SearchView());
+              },
+              child: CarCardWidget(
+                car: carsList[index],
+              ),
             ),
             childCount: carsList.length,
           ),
